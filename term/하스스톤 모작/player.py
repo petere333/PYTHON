@@ -287,5 +287,5 @@ def fight(p1, p2):
         p1.field.remove(p1.field[0])
     if len(p2.field)>0:
         p2.field.remove(p2.field[0])
-    delay(1)
+    delay(2)
     repaint()

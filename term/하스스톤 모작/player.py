@@ -63,16 +63,6 @@ class Player:
             self.hp -= self.taljin
             self.taljin += 1
             repaint()
-            if self.hp<=0 and ai.hp>0:
-                font50.draw(480, 270, "패배했습니다!", (0, 0, 0))
-                font30.draw(480, 200, "3초 후 게임이 종료됩니다.", (0, 0, 0))
-                delay(3)
-                exit(0)
-            elif self.hp<=0 and myChar.hp<=0:
-                font50.draw(480, 270, "무승부입니다!", (0, 0, 0))
-                font30.draw(480, 200, "3초 후 게임이 종료됩니다.", (0, 0, 0))
-                delay(3)
-                exit(0)
 
     def printhighlight(self):
         if self.selected >= 0:
@@ -120,16 +110,6 @@ class Player:
             self.hp-=self.taljin
             self.taljin+=1
             repaint()
-            if self.hp<=0 and ai.hp>0:
-                font50.draw(480, 270, "패배했습니다!", (0, 0, 0))
-                font30.draw(480, 200, "3초 후 게임이 종료됩니다.", (0, 0, 0))
-                delay(3)
-                exit(0)
-            elif self.hp<=0 and ai.hp<=0:
-                font50.draw(480, 270, "무승부입니다!", (0, 0, 0))
-                font30.draw(480, 200, "3초 후 게임이 종료됩니다.", (0, 0, 0))
-                delay(3)
-                exit(0)
         self.selected = -1
         repaint()
 
@@ -193,16 +173,6 @@ class AI:
             self.hp -= self.taljin
             self.taljin += 1
             repaint()
-            if self.hp<=0 and myChar.hp>0:
-                font50.draw(480, 270, "승리했습니다!", (0, 0, 0))
-                font30.draw(480, 200, "3초 후 게임이 종료됩니다.", (0, 0, 0))
-                delay(3)
-                exit(0)
-            elif self.hp<=0 and myChar.hp<=0:
-                font50.draw(480, 270, "무승부입니다!", (0, 0, 0))
-                font30.draw(480, 200, "3초 후 게임이 종료됩니다.", (0, 0, 0))
-                delay(3)
-                exit(0)
 
 
     def printhand(self):

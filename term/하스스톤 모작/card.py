@@ -38,12 +38,13 @@ class Card:
         self.atk = 0
         self.hp = 0
         self.image = load_image('./res/image/error.png')
-        self.status = 0
+        self.index = 0
 
     def get(self, index):
         self.atk = attacks[index]
         self.hp = hps[index]
         self.image = images[index]
+        self.index=index
 
     def attack(self, enemy):
         return self.hp-enemy.atk

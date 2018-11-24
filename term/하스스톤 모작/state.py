@@ -1,4 +1,7 @@
 from player import *
+from netplay import *
+import mq
+
 
 def close_state():
     clear_canvas()
@@ -59,8 +62,38 @@ def result_state(result):
 
     menu_state()
 def wait_net_state():
-    invalid.draw(480, 270)
+    mq.connect()
+    waitsec=0
+    matched=False
+    while (waitsec<10):
+        mq.sendok()
+        waitsec+=1
+        if mq.cardget != mq.myid and mq.cardget != None and mq.cardget!="Sending from Unity3D!!!":
+            matched=True
+            break
+        delay(1)
+    if(matched==True):
+        print("matched")
+        net_start_state()
+    else:
+        print("not matched")
+        menu_state()
+
+
+def net_start_state():
+    clear_canvas()
+    pane.draw(480, 270)
+    home.drawCard()
+    home.drawCard()
+    home.drawCard()
+    home.drawCard()
     update_canvas()
+
+    repaint()
+    print("repaint")
+    delay(1)
+    mq.client.disconnect()
+
     goback = 0
     while goback == 0:
         events = get_events()
@@ -68,13 +101,12 @@ def wait_net_state():
             if event.type == SDL_MOUSEBUTTONDOWN:
 
                 goback = 1
-            elif event.type==SDL_QUIT:
+            elif event.type == SDL_QUIT:
                 close_state()
     menu_state()
 
-
 def single_start_state():
-
+    update_canvas()
     clear_canvas()
 
     pane.draw(480, 270)
@@ -86,8 +118,8 @@ def single_start_state():
     ai.drawCard()
     ai.drawCard()
     ai.drawCard()
-    update_canvas()
     play_single_state()
+
 
 
 def help_state():
@@ -184,6 +216,7 @@ def play_single_state():
     result_state(finished)
 
 def menu_state():
+    print("menu")
     clear_canvas()
 
     title.draw(480, 270)
@@ -217,7 +250,6 @@ def menu_state():
         wait_net_state()
     elif mode == 2:
         loading.draw(480, 270)
-        update_canvas()
         delay(3)
         single_start_state()
     elif mode == 3:
@@ -237,3 +269,4 @@ loading = load_image('./res/image/loading.png')
 invalid = load_image('./res/image/invalid.png')
 pane = load_image('./res/image/board.png')
 title = load_image('./res/image/title.png')
+matching=load_image('./res/image/matching.png')
